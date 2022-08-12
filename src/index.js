@@ -3,7 +3,13 @@ import ReactDOM from "react-dom"
 import App from "./components/App"
 import "bootstrap/dist/css/bootstrap.min.css"
 
+<<<<<<< HEAD
 ReactDOM.render(
+=======
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+>>>>>>> e1fe955a1160fe1b3d4aba17d2f9780af6f59791
   <React.StrictMode>
     <App />
   </React.StrictMode>,
