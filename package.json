@@ -8,12 +8,9 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-<<<<<<< HEAD
     "bootstrap": "^5.2.0",
     "firebase": "^9.9.2",
-=======
     "path": "^0.12.7",
->>>>>>> e1fe955a1160fe1b3d4aba17d2f9780af6f59791
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",

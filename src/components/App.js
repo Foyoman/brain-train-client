@@ -12,7 +12,6 @@ import Typer from "./Typer"
 
 function App() {
   return (
-<<<<<<< HEAD
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}
@@ -45,25 +44,6 @@ function App() {
       </div>
     </Container>
   )
-=======
-    <div className="App">
-
-
-      <h1>Werds</h1>
-      <nav
-        style={{
-          borderBottom: "solid 1px",
-          paddingBottom: "1rem",
-        }}
-      >
-        <Link to="/">Home</Link> |{" "}
-        <Link to="/proto-type">proto-type</Link>
-      </nav>
-      <Outlet />
-
-    </div>
-  );
->>>>>>> e1fe955a1160fe1b3d4aba17d2f9780af6f59791
 }
 
 export default App
