@@ -6,7 +6,7 @@ import Typer from './Typer';
 class ProtoType extends Component {
     render () {
         return (
-            <div>
+            <div className="container">
                 <h1>ProtoType</h1>
                 <Typer />
             </div>

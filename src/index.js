@@ -3,12 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import wordsListPath from 'word-list';
+import { 
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Typer from './components/Typer';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="proto-type" element={<Typer />} />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem "}}>
+                <h1>404: page not found</h1>
+                <p>Go somewhere else</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
