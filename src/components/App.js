@@ -1,48 +1,17 @@
 import React from "react"
-import Signup from "./Signup"
 import { Container } from "react-bootstrap"
-import { AuthProvider } from "../contexts/AuthContext"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Dashboard from "./Dashboard"
-import Login from "./Login"
-import PrivateRoute from "./PrivateRoute"
-import ForgotPassword from "./ForgotPassword"
-import UpdateProfile from "./UpdateProfile"
-import Typer from "./Typer"
+import { Outlet } from "react-router-dom"
+import Navbar from "./Navbar"
 
 function App() {
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <BrowserRouter>
-          <AuthProvider>
-            <Routes>
-              <Route exact path="/dashboard" 
-                element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                } 
-              />
-              <Route path="/update-profile" 
-                element={
-                  <PrivateRoute>
-                    <UpdateProfile />
-                  </PrivateRoute>
-                } 
-              />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/proto-type" element={<Typer />} />
-            </Routes>
-          </AuthProvider>
-        </BrowserRouter>
-      </div>
-    </Container>
+    <div className="App">
+      <Container style={{ maxWidth: "960px" }}>
+        <h1>Werds</h1>
+        <Navbar />
+        <Outlet />
+      </Container>
+    </div>
   )
 }
 
