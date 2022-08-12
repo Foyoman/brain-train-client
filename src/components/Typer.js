@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container } from 'react-bootstrap';
 
 const Typer = () => {
 
@@ -90,19 +91,21 @@ const Typer = () => {
     useEffect(fetchQuote, []); // load one quote at page load(en)
 
     return (
-        <div>
-            <h3 className={ style }>{quote}</h3>
-            <div className="stats">
-                <h3>time (seconds): { time }</h3>
-                <h3>wpm: { wpm }</h3>
-                <h3>score: { score }</h3>
+        <Container className="mt-4">
+            <div>
+                <h3 className={ style }>{quote}</h3>
+                <div className="stats">
+                    <h3>time (seconds): { time }</h3>
+                    <h3>wpm: { wpm }</h3>
+                    <h3>score: { score }</h3>
+                </div>
+                <form onSubmit={ _handleSubmit }>
+                    <input type="text" autoFocus onChange={ _handleInput } value={ input } />
+                </form>
+                <h3>{ result }</h3>
+                <button onClick={ reset }>reset</button>
             </div>
-            <form onSubmit={ _handleSubmit }>
-                <input type="text" autoFocus onChange={ _handleInput } value={ input } />
-            </form>
-            <h3>{ result }</h3>
-            <button onClick={ reset }>reset</button>
-        </div>
+        </Container>
     );
 };
 
