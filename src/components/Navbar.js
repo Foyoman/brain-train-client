@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function Navbar() {
+	const { currentUser } = useAuth()
+
 	return (
 		<nav
 			style={{
@@ -12,7 +15,10 @@ export default function Navbar() {
 			<Link to="/dashboard">Dashboard</Link> |{" "}
 			<Link to="/signup">Sign Up</Link> |{" "}
 			<Link to="/login">Log In</Link> |{" "}
-			<Link to="/proto-type">proto-type</Link>
+			<Link to="/proto-type">proto-type</Link> |{" "}
+			{currentUser && currentUser.email}
 		</nav>
 	)
 }
+
+// !currentUser acts like if @current_user.empty?

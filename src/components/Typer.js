@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import '../styles.css'
+import _ from 'lodash';
+import '../styles.css';
 
 const Typer = () => {
 
@@ -10,16 +11,17 @@ const Typer = () => {
     const [result, setResult] = useState('');
     const [score, setScore] = useState(0);
     const [style, setStyle] = useState('');
-    const [time, setTime] = useState(0);
+    const [time, setTime] = useState(30);
     const [chars, setChars] = useState(0); // sets total amount of characters a user has typed
     const [wpm, setWpm] = useState(0); // wpm = (chars / 5) * 60 / time
     const [running, setRunning] = useState(false);
+    const [highScore, setHighScore] = useState(0);
 
     useEffect(() => {
         let interval;
         if (running) { // if the running state is true, start the timer
             interval = setInterval(() => {
-            setTime((prevTime) => prevTime + 1);
+            setTime((prevTime) => prevTime - 1);
             }, 1000); // the time state increments by 1 every second
         } else if (!running) {
             clearInterval(interval); // stop the interval if running is false
@@ -29,7 +31,7 @@ const Typer = () => {
 
 
     const calculateWPM = () => {
-        setWpm(Math.floor((chars / 5) * 60 / time) || 0); // words per minute is the total characters typed correctly divided by 5 times 60 divided by the total seconds elapsed
+        setWpm(Math.floor((chars / 5) * 60 / (30 - time)) || 0); // words per minute is the total characters typed correctly divided by 5 times 60 divided by the total seconds elapsed
     }
 
     const fetchQuote = () => {
@@ -50,21 +52,17 @@ const Typer = () => {
         fetchQuote();
     }
 
-    if (input === quote && input.length > 0) { // auto submits without needing to press enter if the input matches the entire quote
+    if (input === quote && input.length > 0) { // auto submits if the input matches the entire quote
         setRunning(false);
-        if (input === quote) {
-            setScore(score + quote.length)
-        } else {
-            setScore(score)
-        }
+        setScore(score + quote.length);
         setInput('');
         fetchQuote();
     }  
 
     const _handleInput = (e) => {
         const quoteByChar = quote.split('').slice(0, e.target.value.length).join(''); // slices the quote to the current length of the input
-        if (e.target.value === quoteByChar) { // to be compared with the input - BUGGED. need 2 incorrect chars before it's detected as wrong
-            setChars(chars + 1); // only add characters to the char count on a correct keystroke
+        if (e.target.value === quoteByChar) { // to be compared with the input
+            setChars(chars + 1); // only add to the char count on a correct keystroke
             setResult('nice')
             setStyle('green')
         } else {
@@ -76,20 +74,34 @@ const Typer = () => {
         setInput(e.target.value); // asynchronous
     }
 
-
     const reset = () => {
         fetchQuote();
         setInput('');
         setResult('');
         setScore(0);
         setStyle('');
-        setTime(0);
+        setTime(30);
         setChars(0);
         setWpm(0);
         setRunning(false);
     }
 
+    if (time === 0) {
+        if (wpm > highScore) {
+            setHighScore(wpm)
+        }
+        reset();
+    }
+
     useEffect(fetchQuote, []); // load one quote at page load(en)
+
+    useEffect(() => {
+        axios("https://random-word-api.herokuapp.com/all").then((response) => {
+            let array = []
+            array = _.sample(response.data, 5); // this should give me an array of 5 random words but it don't
+            console.log(array)
+        });
+    }, [])
 
     return (
         <Container className="mt-4">
@@ -98,7 +110,7 @@ const Typer = () => {
                 <div className="stats">
                     <h3>time (seconds): { time }</h3>
                     <h3>wpm: { wpm }</h3>
-                    <h3>score: { score }</h3>
+                    <h3>high score: { highScore }</h3>
                 </div>
                 <form onSubmit={ _handleSubmit }>
                     <input type="text" autoFocus onChange={ _handleInput } value={ input } />
