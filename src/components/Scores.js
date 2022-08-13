@@ -32,7 +32,7 @@ export default function Scores() {
 					<tr>
 						<th>💯</th>
 						<th>Game</th>
-						<th>Score</th>
+						<th>WPM</th>
 						<th>Timer</th>
 						<th>User</th>
 					</tr>
@@ -44,7 +44,7 @@ export default function Scores() {
 								<td>{ i + 1 }</td>
 								<td>{ score.game }</td>
 								<td>{ score.score }</td>
-								<td>{ score.timer }</td>
+								<td>{ score.timer }s</td>
 								<td>{ score.user }</td>
 							</tr>
 						)

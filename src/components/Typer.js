@@ -11,7 +11,6 @@ const Typer = () => {
 
 	const [quote, setQuote] = useState('');
 	const [input, setInput] = useState('');
-	const [score, setScore] = useState(0);
 	const [style, setStyle] = useState('');
 	const [time, setTime] = useState(15);
 	const [timer, setTimer] = useState(15); // default timer 
@@ -50,18 +49,12 @@ const Typer = () => {
 	const _handleSubmit = (e) => {
 		e.preventDefault();
 		setRunning(false); // stops the timer 
-		if (input === quote) { // adds score as the length of characters in the quote if correct
-				setScore(score + quote.length)
-		} else {
-				setScore(score)
-		}
 		setInput(''); // clears input
 		fetchQuote();
 	}
 
 	if (input === quote && input.length > 0) { // auto submits if the input matches the entire quote
 		setRunning(false);
-		setScore(score + quote.length);
 		setInput('');
 		fetchQuote();
 	}  
@@ -82,7 +75,6 @@ const Typer = () => {
 	const reset = () => {
 		fetchQuote();
 		setInput('');
-		setScore(0);
 		setStyle('');
 		setTime(15);
 		setChars(0);
@@ -103,9 +95,7 @@ const Typer = () => {
 
 	useEffect(() => {
 		axios("https://random-word-api.herokuapp.com/all").then((response) => {
-				let array = []
-				array = _.sample(response.data, 5); // this should give me an array of 5 random words but it don't
-				console.log(array)
+				console.log(_.sample(response.data, 5)); // this should give me an array of 5 random words but it don't
 		});
 	}, [])
 
