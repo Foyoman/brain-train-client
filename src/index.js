@@ -1,5 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom/client"
 import App from "./components/App"
 import "bootstrap/dist/css/bootstrap.min.css"
 import { AuthProvider } from "./contexts/AuthContext"
@@ -12,6 +12,7 @@ import ForgotPassword from "./components/ForgotPassword"
 import UpdateProfile from "./components/UpdateProfile"
 import Typer from "./components/Typer"
 import Home from "./components/Home"
+import Scores from "./components/Scores"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -38,6 +39,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/proto-type" element={<Typer />} />
+          <Route path="/scores" element={<Scores />} />
           <Route
             path="*"
             element={

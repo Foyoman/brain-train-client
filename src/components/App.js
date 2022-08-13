@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Container style={{ maxWidth: "960px" }}>
-        <h1>Werds</h1>
+        <h1>Brain Train</h1>
         <Navbar />
         <Outlet />
       </Container>
