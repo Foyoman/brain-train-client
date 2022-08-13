@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Card, Button, Container } from 'react-bootstrap';
 import _ from 'lodash';
 import '../styles.css';
 import { db } from '../firebase'
@@ -11,7 +11,6 @@ const Typer = () => {
 
 	const [quote, setQuote] = useState('');
 	const [input, setInput] = useState('');
-	const [result, setResult] = useState('');
 	const [score, setScore] = useState(0);
 	const [style, setStyle] = useState('');
 	const [time, setTime] = useState(15);
@@ -71,10 +70,8 @@ const Typer = () => {
 		const quoteByChar = quote.split('').slice(0, e.target.value.length).join(''); // slices the quote to the current length of the input
 		if (e.target.value === quoteByChar) { // to be compared with the input
 			setChars(chars + 1); // only add to the char count on a correct keystroke
-			setResult('nice')
 			setStyle('green')
 		} else {
-			setResult('nahh')
 			setStyle('red')
 		}
 		calculateWPM(); 
@@ -85,7 +82,6 @@ const Typer = () => {
 	const reset = () => {
 		fetchQuote();
 		setInput('');
-		setResult('');
 		setScore(0);
 		setStyle('');
 		setTime(15);
@@ -114,23 +110,33 @@ const Typer = () => {
 	}, [])
 
 	return (
-		<Container className="mt-4">
-				<div>
+		<Container 
+				className="d-flex align-items-center justify-content-center"
+				style={{ minHeight: "20vh", marginTop: "1em" }}
+		>
+			<div className='w-100'>
+				<Card>
+					<Card.Body>
+						<h1>Proto-Type</h1>
+						<br />
 						<h3 className={ style }>{quote}</h3>
+						<br />
 						<div className="stats">
-								<h3>time (seconds): { time }</h3>
-								<h3>wpm: { wpm }</h3>
-								<h3>high score: { highScore }</h3>
+								<h4>time (seconds): { time }</h4>
+								<h4>wpm: { wpm }</h4>
+								<h4>high score: { highScore }</h4>
 						</div>
 						<form onSubmit={ _handleSubmit }>
 								<input type="text" autoFocus onChange={ _handleInput } value={ input } />
 						</form>
-						<h3>{ result }</h3>
-						<button onClick={ reset }>reset</button>
-				</div>
-				<div className="score-card">
+						<br />
+						<Button onClick={ reset }>reset</Button>
+					</Card.Body>
+				</Card>
+			</div>
+			<div className="score-card">
 						
-				</div>
+			</div>
 		</Container>
 	);
 };

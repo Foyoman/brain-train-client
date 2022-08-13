@@ -20,3 +20,12 @@ input[type="text"] {
   width: 100%;
   height: 3em;
 }
+
+.react-box {
+  height: 10em;
+  width: 10em;
+}
+
+.green-go {
+  background-color: green;
+}
