@@ -4,9 +4,11 @@ import { Card, Button, Container } from 'react-bootstrap';
 import _ from 'lodash';
 import '../styles.css';
 import { db } from '../firebase'
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { useAuth } from '../contexts/AuthContext'
 
 const Typer = () => {
+	const { currentUser } = useAuth()
 	const scoresCollectionRef = collection(db, "scores")
 
 	const [quote, setQuote] = useState('');
@@ -21,7 +23,7 @@ const Typer = () => {
 
 	const postScore = async () => {
 		// game, timer, score, user
-		await addDoc(scoresCollectionRef, { game: "proto-type", timer: timer, score: wpm, user: "test" });
+		await addDoc(scoresCollectionRef, { game: "proto-type", timer: timer, score: wpm, user: currentUser ? currentUser.email : "Anonymous" });
 	}
 
 	useEffect(() => {

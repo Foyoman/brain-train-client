@@ -32,7 +32,7 @@ export default function Scores() {
 					<tr>
 						<th>💯</th>
 						<th>Game</th>
-						<th>WPM</th>
+						<th>Score</th>
 						<th>Timer</th>
 						<th>User</th>
 					</tr>

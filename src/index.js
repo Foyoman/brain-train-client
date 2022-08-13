@@ -13,7 +13,7 @@ import UpdateProfile from "./components/UpdateProfile"
 import Typer from "./components/Typer"
 import Home from "./components/Home"
 import Scores from "./components/Scores"
-import Reactjsion from "./components/Reactjsion"
+import Reaction from "./components/Reaction"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -40,7 +40,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/proto-type" element={<Typer />} />
-          <Route path="/reactjsion" element={<Reactjsion />} />
+          <Route path="/reaction" element={<Reaction />} />
           <Route path="/scores" element={<Scores />} />
           <Route
             path="*"
