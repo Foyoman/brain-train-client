@@ -23,7 +23,7 @@ const Typer = () => {
 
 	const postScore = async () => {
 		// game, timer, score, user
-		await addDoc(scoresCollectionRef, { game: "proto-type", timer: timer, score: wpm, user: currentUser ? currentUser.email : "Anonymous" });
+		await addDoc(scoresCollectionRef, { game: "Proto-Type", timer: timer, score: wpm, user: currentUser ? currentUser.email : "Anonymous" });
 	}
 
 	useEffect(() => {
@@ -109,7 +109,7 @@ const Typer = () => {
 			<div className='w-100'>
 				<Card>
 					<Card.Body>
-						<h1>Proto-Type</h1>
+						<h1>⌨️ Proto-Type</h1>
 						<br />
 						<h3 className={ style }>{quote}</h3>
 						<br />
@@ -127,7 +127,7 @@ const Typer = () => {
 				</Card>
 			</div>
 			<div className="score-card">
-						
+				{/* TODO: show a scorecard when a user finishes a test */}
 			</div>
 		</Container>
 	);

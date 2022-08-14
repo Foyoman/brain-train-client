@@ -18,7 +18,7 @@ export default function Reaction() {
 	const [gameState, setGameState] = useState('start');
 	const [startTime, setStartTime] = useState(0);
 	const [elapsed, setElapsed] = useState(0);
-	const [goTime, setGoTime] = useState(Math.floor(Math.random() * 13) + 3); // random number between 3 and 15
+	const [goTime, setGoTime] = useState(Math.floor(Math.random() * 8) + 3); // random number between 3 and 15
 	const [scores, setScores] = useState([]);
 	const [count, setCount] = useState(1);
 	const [finalScore, setFinalScore] = useState(0);
@@ -60,7 +60,7 @@ export default function Reaction() {
 		setGameState('start');
 		setStartTime(0);
 		setElapsed(0);
-		setGoTime(Math.floor(Math.random() * 13) + 3);
+		setGoTime(Math.floor(Math.random() * 8) + 3);
 		setScores([]);
 		setCount(1);
 		setFinalScore(0);
@@ -68,16 +68,16 @@ export default function Reaction() {
 
 	const handleClick = () => {
 		if (gameState === 'start') {
-			setGameState('hold');
+			setGameState('wait');
 			setRunningA(true);
 		}
-		if (gameState === 'hold') {
+		if (gameState === 'wait') {
 			setTime(0);
 			setRunningA(false);
 			setGameState('tooSoon');
 			setStartTime(0);
 			setElapsed(0);
-			setGoTime(Math.floor(Math.random() * 13) + 3)
+			setGoTime(Math.floor(Math.random() * 8) + 3)
 		}
 		if (gameState === 'tooSoon') {
 			setGameState('start');
@@ -90,15 +90,15 @@ export default function Reaction() {
 		if (gameState === 'result') {
 			setGameState('start');
 			setElapsed(0);
-			setGoTime(Math.floor(Math.random() * 13) + 3);
+			setGoTime(Math.floor(Math.random() * 8) + 3);
 			setCount(count + 1)
 		}
 		if (gameState === 'click' && count >= 3) {
 			setGameState('finalResult');
 			setFinalScore(
-				_.reduce([...scores, Number(elapsed)], function(memo, num) {
+				Math.round(_.reduce([...scores, Number(elapsed)], function(memo, num) {
         	return memo + num;
-    		}, 0) / 3
+    		}, 0) / 3)
 			)
 		}
 		if (gameState === 'finalResult') {
@@ -127,9 +127,9 @@ export default function Reaction() {
 						<h3>{ count }/3</h3>
 						<Button
 							className={`
-								btn-lg
+								btn-lg mt-1 mb-1
 								${gameState === "start" ? "btn-primary" : ""} 
-								${gameState === "hold" ? "btn-dark" : ""}
+								${gameState === "wait" ? "btn-dark" : ""}
 								${gameState === "tooSoon" ? "btn-warning" : ""} 
 								${gameState === "click" ? "btn-success" : ""}
 								${gameState === "result" || gameState === "finalResult" ? "btn-info" : ""}
@@ -138,7 +138,7 @@ export default function Reaction() {
 							onClick={ handleClick }
 						>
 							{ gameState === "start" ? "Start" : "" }
-							{ gameState === "hold" ? "hold..." : "" }
+							{ gameState === "wait" ? "wait..." : "" }
 							{ gameState === "tooSoon" ? "Too soon!" : "" }
 							{ gameState === "click" ? "Click!" : "" }
 							{ gameState === "result" ? `${elapsed}ms` : "" }

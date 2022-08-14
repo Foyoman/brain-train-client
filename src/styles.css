@@ -29,3 +29,7 @@ input[type="text"] {
 .green-go {
   background-color: green;
 }
+
+.pt-button {
+  background-color: lavender;
+}
